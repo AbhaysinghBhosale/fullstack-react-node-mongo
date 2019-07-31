@@ -1,4 +1,10 @@
-node_modules/
-/.env.development
-/package-lock.json
+/api/node_modules/
+/webapp/node_modules/
+
+/api/.env.development
+/webapp/.env.development
+
+/api/package-lock.json
+/webapp/package-lock.json
+
 .vscode
