@@ -1,20 +1,9 @@
 import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
+import PostService from '../../services/PostService';
 
-import {
-  AppAside,
-  AppFooter,
-  AppHeader,
-  AppSidebar,
-  AppSidebarFooter,
-  AppSidebarForm,
-  AppSidebarHeader,
-  AppSidebarMinimizer,
-  AppBreadcrumb2 as AppBreadcrumb,
-  AppSidebarNav2 as AppSidebarNav,
-} from '@coreui/react';
+import { AppAside, AppBreadcrumb, AppFooter, AppHeader, AppSidebar, AppSidebarFooter, AppSidebarForm, AppSidebarHeader, AppSidebarMinimizer, AppSidebarNav,} from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
 // routes config
@@ -25,6 +14,25 @@ const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
+
+  componentDidMount(){
+    //create post
+    PostService.createPosts({
+      "title": "post no six",
+      "body": "this is sixth post"
+    }).then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.log(error);
+    })
+
+    //get post
+    PostService.getPosts().then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
@@ -46,13 +54,13 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
+            <AppSidebarNav navConfig={navigation} {...this.props} />
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router}/>
+            <AppBreadcrumb appRoutes={routes}/>
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
