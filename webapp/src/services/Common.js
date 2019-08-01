@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-let apiEndpoint =  process.env.SERVICE_API_URL
-
+let apiEndpoint =  process.env.REACT_APP_ServiveAPIURL;
+console.log(process.env)
 const Service = axios.create({
     baseURL: apiEndpoint,
 });
