@@ -1,7 +1,9 @@
 import React, { Component, Suspense } from 'react';
+import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import PostService from '../../services/PostService';
+import { postAction } from '../../actions/postAction';
 
 import { AppAside, AppBreadcrumb, AppFooter, AppHeader, AppSidebar, AppSidebarFooter, AppSidebarForm, AppSidebarHeader, AppSidebarMinimizer, AppSidebarNav,} from '@coreui/react';
 // sidebar nav config
@@ -18,8 +20,8 @@ class DefaultLayout extends Component {
   componentDidMount(){
     //create post
     PostService.createPosts({
-      "title": "post no six",
-      "body": "this is sixth post"
+      "title": "post no eight",
+      "body": "this is eighth post"
     }).then((response) => {
       console.log(response.data);
     }).catch((error) => {
@@ -28,7 +30,7 @@ class DefaultLayout extends Component {
 
     //get post
     PostService.getPosts().then((response) => {
-      console.log(response.data);
+      this.props.postAction(response.data.posts);
     }).catch((error) => {
       console.log(error);
     })
@@ -96,5 +98,12 @@ class DefaultLayout extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  ...state
+})
 
-export default DefaultLayout;
+const mapDispatchToProps = dispatch => ({
+  postAction: (data) => dispatch(postAction(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultLayout);

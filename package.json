@@ -1,0 +1,26 @@
+{
+  "name": "fullstack-react-node-mongo",
+  "version": "1.0.0",
+  "description": "Full Stack Application Skeleton Developed using the React as Front-end and Node Js as a Backend",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "concurrently \"cd api && node App.js\" \"cd webapp && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbhaysinghBhosale/fullstack-react-node-mongo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbhaysinghBhosale/fullstack-react-node-mongo/issues"
+  },
+  "homepage": "https://github.com/AbhaysinghBhosale/fullstack-react-node-mongo#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}
