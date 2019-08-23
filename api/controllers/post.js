@@ -4,31 +4,61 @@ exports.defaultRoute = (req,res)=>{
     res.send('Welcome to Node Application');
 }
 
-exports.getPost = (req,res)=>{
-    const posts = Post.find()
-        .select("_id title body")
-        .then(posts => {
-            res.json({posts});
-        }).catch( err => 
-            console.log(err) 
-        )
+//Get all posts
+exports.getPosts = (req,res)=>{
+    Post.find().select("_id title body").then(posts => {
+        res.json({posts});
+    }).catch( err => {
+        res.status(500).json({
+            error: err
+        });
+    })
 }
 
+//get single post by id
+exports.getPost = (req,res)=>{
+    Post.findById(req.body._id).select("_id title body").then(posts => {
+        res.json({posts});
+    }).catch( err => {
+        res.status(500).json({
+            error: err
+        });
+    })
+}
 
+//create a post
 exports.createPost = (req,res) =>{
     const post = new Post(req.body);
     post.save().then(result => {
         res.status(200).json({
             post:result
         });
+    }).catch( err => {
+        res.status(500).json({
+            error: err
+        });
     })
 }
 
+//update a post
 exports.updatePost = (req,res) =>{
-    const post = new Post(req.body);
-    post.findByIdAndUpdate().then(result => {
+    Post.findByIdAndUpdate(req.body._id, req.body,{new:true}).then(result => {
         res.status(200).json({
-            post:result
+            post: result
+        });
+    }).catch( err => {
+        res.status(500).json({
+            error: err
+        });
+    })
+}
+
+exports.deletePost = (req,res) =>{
+    Post.findByIdAndDelete(req.body._id).then(posts => {
+        res.status(200).json({posts});
+    }).catch( err => {
+        res.status(500).json({
+            error: err
         });
     })
 }

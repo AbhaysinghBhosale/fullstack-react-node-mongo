@@ -16,6 +16,19 @@ exports.createPostValidator = (req,res,next)=>{
     next();
 }
 
+exports.getPostValidator = (req,res,next) =>{
+    //validate id
+    req.check('_id','Please enter post id').notEmpty();
+
+    const errors = req.validationErrors();
+    if(errors){
+        const firstError = errors.map((error) => error.msg)[0];
+        return res.status(400).json({error:firstError});
+    }
+    //proceed to next middleware
+    next();
+}
+
 exports.updatePostValidator = (req,res,next) =>{
 
     //validate id
@@ -27,6 +40,19 @@ exports.updatePostValidator = (req,res,next) =>{
     //validate body
     req.check('body','Please enter post body').notEmpty();
     req.check('body','Post body must be min 4 and max 2000 characters').isLength({min:4,max:2000});
+
+    const errors = req.validationErrors();
+    if(errors){
+        const firstError = errors.map((error) => error.msg)[0];
+        return res.status(400).json({error:firstError});
+    }
+    //proceed to next middleware
+    next();
+}
+
+exports.deletePostValidator = (req,res,next) =>{
+    //validate id
+    req.check('_id','Please enter post id').notEmpty();
 
     const errors = req.validationErrors();
     if(errors){
