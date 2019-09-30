@@ -1,9 +1,5 @@
 const Post = require('../models/post');
 
-exports.defaultRoute = (req,res)=>{
-    res.send('Welcome to Node Application');
-}
-
 //Get all posts
 exports.getPosts = (req,res)=>{
     Post.find().select("_id title body").then(posts => {

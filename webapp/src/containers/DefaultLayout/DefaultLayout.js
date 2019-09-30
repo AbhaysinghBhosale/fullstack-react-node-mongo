@@ -19,21 +19,22 @@ class DefaultLayout extends Component {
 
   componentDidMount(){
     //create post
-    PostService.createPosts({
-      "title": "post no eight",
-      "body": "this is eighth post"
-    }).then((response) => {
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error);
-    })
+    // PostService.createPosts({
+    //   "title": "post no tenth",
+    //   "body": "this is eighth post"
+    // }).then((response) => {
+    //   console.log(response.data);
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
 
     //get post
-    PostService.getPosts().then((response) => {
-      this.props.postAction(response.data.posts);
-    }).catch((error) => {
-      console.log(error);
-    })
+    // PostService.getPosts().then((response) => {
+    //   console.log(response.data.posts)
+    //   this.props.postAction(response.data.posts);
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
   }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>

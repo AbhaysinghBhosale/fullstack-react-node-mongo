@@ -62,3 +62,20 @@ exports.deletePostValidator = (req,res,next) =>{
     //proceed to next middleware
     next();
 }
+
+exports.createUserValidator = (req,res,next)=>{
+    //validate title
+    req.check('firstname','Please enter firstname').notEmpty();
+    req.check('lastname','Please enter lstname').notEmpty();
+    req.check('email','Please enter email').notEmpty();
+    req.check('email','Please enter valid email').isEmail();
+    req.check('phone','Phone number must be min 6 and max 14 characters').isLength({min:6,max:14});
+
+    const errors = req.validationErrors();
+    if(errors){
+        const firstError = errors.map((error) => error.msg)[0];
+        return res.status(400).json({error:firstError});
+    }
+    //proceed to next middleware
+    next();
+}
