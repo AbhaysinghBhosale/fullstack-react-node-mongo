@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/AbhaysinghBhosale/fullstack-react-node-mongo#readme",
   "dependencies": {
-    "concurrently": "^4.1.1"
+    "concurrently": "^8.0.1"
   }
 }
